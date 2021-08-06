@@ -4,10 +4,11 @@ import { Redirect, Route, useLocation } from "react-router-dom";
 import { useAppContext } from "./AppContext";
 
 // types
-import { RouteProps } from "react-router";
+// import { RouteProps } from "react-router";
 
 interface IProtectedRouteProps {
-  component: React.FC<RouteProps>;
+  // component: React.FC<RouteProps>;
+  component: any;
   [key: string]: any;
 }
 
@@ -16,7 +17,7 @@ const ProtectedRoute = ({
   ...rest
 }: IProtectedRouteProps) => {
   const {
-    state: {
+    appState: {
       user: { authenticated },
     },
   } = useAppContext();

@@ -1,10 +1,10 @@
 import React from "react";
-// import jwt_decode from "jwt-decode";
-// import { Spin } from "antd";
 
+// components
+import SplashScreen from "../components/SplashScreen";
+
+// utils
 import { api } from "./util";
-
-// types
 
 interface IAppContextState {
   user: {
@@ -16,8 +16,8 @@ interface IAppContextState {
 }
 
 interface IAppContext {
-  state: IAppContextState;
-  setState: React.Dispatch<React.SetStateAction<any>>;
+  appState: IAppContextState;
+  setAppState: React.Dispatch<React.SetStateAction<IAppContextState>>;
 }
 
 const appContextStateInitialValues = {
@@ -30,8 +30,8 @@ const appContextStateInitialValues = {
 };
 
 const AppContext = React.createContext<IAppContext>({
-  state: appContextStateInitialValues,
-  setState: () => {},
+  appState: appContextStateInitialValues,
+  setAppState: () => {},
 });
 
 export const useAppContext = () => React.useContext(AppContext);
@@ -78,9 +78,11 @@ const AppContextProvider = (props: any) => {
   }, []);
 
   return loadingUI ? (
-    <h1>LOADING</h1>
+    <SplashScreen />
   ) : (
-    <AppContext.Provider value={{ state: appState, setState: setAppState }}>
+    <AppContext.Provider
+      value={{ appState: appState, setAppState: setAppState }}
+    >
       {props.children}
     </AppContext.Provider>
   );
