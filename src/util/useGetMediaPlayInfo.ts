@@ -5,26 +5,32 @@ export interface IMediaPlayInfo {
   MediaId: number;
   Title: string;
   ContentUrl: string;
+  Description: string;
 }
 
 export default function useGetMediaPlayInfo(mediaId: number) {
   const [fetchedData, setFetchedData] = React.useState<
-    IMediaPlayInfo | undefined
+    IMediaPlayInfo | null | undefined
   >(undefined);
 
   React.useEffect(() => {
-    function getMediaList() {
+    function getData() {
       api
         .post("/Media/GetMediaPlayInfo", {
           MediaId: mediaId,
           StreamType: "TRIAL",
         })
         .then((res) => {
-          setFetchedData(res.data);
-        });
+          if (res.data === "") {
+            setFetchedData(null);
+          } else {
+            setFetchedData(res.data);
+          }
+        })
+        .catch((err) => {});
     }
 
-    getMediaList();
+    getData();
   }, [mediaId]);
 
   return fetchedData;

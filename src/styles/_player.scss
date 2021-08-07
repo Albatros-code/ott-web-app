@@ -1,0 +1,56 @@
+.player {
+  &__wrapper {
+    background-color: $color-primary-light;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    min-height: 5rem;
+    h1 {
+      font-weight: 400;
+      margin: 0;
+      padding: 0.5rem 2rem;
+      color: $color-secondary;
+    }
+    p {
+      margin-top: 0;
+      text-align: center;
+    }
+  }
+
+  &__player-wrapper {
+    position: relative;
+    padding-bottom: calc(min(56.25%, 360px));
+    height: 0px;
+    width: 95%;
+    max-width: 640px;
+  }
+  &__player {
+    background-color: black;
+    position: absolute;
+  }
+
+  &__description {
+    max-width: 640px;
+    padding: 1rem;
+
+    h2,
+    h3 {
+      font-weight: 300;
+    }
+
+    p {
+      font-weight: 100;
+    }
+  }
+
+  &__description-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

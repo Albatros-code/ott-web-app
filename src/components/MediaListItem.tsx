@@ -27,7 +27,6 @@ export default function MediaListItem(props: IMediaListItem) {
   };
 
   function clampTitle(title: string, characters: number) {
-    console.log(title.length);
     if (title.length > characters) {
       return title.substring(0, characters) + "...";
     } else {
@@ -36,8 +35,6 @@ export default function MediaListItem(props: IMediaListItem) {
   }
 
   const imageUrl = findImageUrl(item);
-
-  console.log(item);
 
   return (
     <li onClick={handleClick}>

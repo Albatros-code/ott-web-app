@@ -51,8 +51,6 @@ const AppContextProvider = (props: any) => {
         .post("/Authorization/SignIn", {})
         //api.post("/Authorization/SignIn", "", { withCredentials: true })
         .then((res) => {
-          console.log(res.data);
-
           const token = `Bearer ${res.data.AuthorizationToken.Token}`;
           api.defaults.headers.common["Authorization"] = token;
 
@@ -61,7 +59,7 @@ const AppContextProvider = (props: any) => {
             UI: { ...prev.UI, loading: false },
             user: { ...prev.user, authenticated: true },
           }));
-
+          //TODO: set refresh token handling or nex log in as anonymous use
           // setTimeout(() => {
           //   refreshToken();
           // }, (exp - iat) * 1000 - 500);
