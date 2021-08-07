@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import useGetMediaList from "../util/useGetMediaList";
 
 // components
+import OttLogo from "../components/OttLogo";
 import MediaListItem from "../components/MediaListItem";
 import SplashScreen from "../components/SplashScreen";
 
@@ -16,17 +17,9 @@ export default function Home() {
   const data = useGetMediaList(3);
   const data2 = useGetMediaList(10);
 
-  // React.useEffect(() => {
-  //   if (!data || !data2) {
-  //     setAppState((prev) => ({ ...prev, UI: { ...prev.UI, loading: true } }));
-  //   } else {
-  //     setAppState((prev) => ({ ...prev, UI: { ...prev.UI, loading: false } }));
-  //   }
-  // }, [data, data2, setAppState]);
-
   return data && data2 ? (
     <div>
-      <h1>home page</h1>
+      <OttLogo size={4} />
       <div
         style={{
           display: "flex",

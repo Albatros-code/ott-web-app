@@ -20,7 +20,7 @@ ReactDOM.render(
     <AppContextProvider>
       <Router>
         <Switch>
-          {/* <Route exact path="/login" component={SplashScreen} /> */}
+          <Route exact path="/elo" component={SplashScreen} />
           <Route exact path="/login" component={Login} />
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/player/:mediaId" component={Player} />

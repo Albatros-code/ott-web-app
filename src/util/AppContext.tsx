@@ -78,7 +78,7 @@ const AppContextProvider = (props: any) => {
   }, []);
 
   return loadingUI ? (
-    <SplashScreen />
+    <SplashScreen hidden={true} />
   ) : (
     <AppContext.Provider
       value={{ appState: appState, setAppState: setAppState }}
