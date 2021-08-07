@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
 *,
 *:before,
 *:after {
@@ -22,3 +26,5 @@ code {
 @import "./util";
 @import "./splashScreen";
 @import "./ottlogo";
+@import "./mediaList";
+@import "./home";

@@ -4,7 +4,9 @@ import useGetMediaList from "../util/useGetMediaList";
 
 // components
 import OttLogo from "../components/OttLogo";
+import TopBar from "../components/TopBar";
 import MediaListItem from "../components/MediaListItem";
+import MediaList from "../components/MediaList";
 import SplashScreen from "../components/SplashScreen";
 
 // utils
@@ -18,25 +20,17 @@ export default function Home() {
   const data2 = useGetMediaList(10);
 
   return data && data2 ? (
-    <div>
-      <OttLogo size={4} />
+    <div className="home__wrapper">
+      <TopBar />
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <ul>
-          {data &&
-            data.map((item) => {
-              return <MediaListItem item={item} key={item.Id} />;
-            })}
-        </ul>
-        <ul>
-          {data2 &&
-            data2.map((item) => {
-              return <MediaListItem item={item} key={item.Id} />;
-            })}
-        </ul>
+        <MediaList title={"Media List 1"} data={data} />
+        <MediaList title={"Media List 2"} data={data2} />
       </div>
     </div>
   ) : (
