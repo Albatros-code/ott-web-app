@@ -13,15 +13,21 @@ interface IMediaListItem {
 export default function MediaListItem(props: IMediaListItem) {
   const history = useHistory();
   const { item } = props;
+  // const contentAvailable = item.IsTrialContentAvailable
+  const contentAvailable = true;
 
   function handleClick() {
-    history.push(`/player/${item.Id}`);
+    if (contentAvailable) history.push(`/player/${item.Id}`);
   }
 
   const findImageUrl = (item: IMedia) => {
-    const frameImage = item.Images.find(
+    let frameImage = item.Images.find(
       (image) => image.ImageTypeCode === "FRAME"
     );
+
+    if (!frameImage) {
+      frameImage = item.Images[0];
+    }
 
     return frameImage?.Url;
   };
@@ -38,7 +44,11 @@ export default function MediaListItem(props: IMediaListItem) {
 
   return (
     <li onClick={handleClick}>
-      <div className="media-list-item__container">
+      <div
+        className={`media-list-item__container ${
+          contentAvailable && "media-list-item__container--hover"
+        }`}
+      >
         <div
           className="media-list-item__image"
           style={{ backgroundImage: `url('${imageUrl}')` }}
@@ -46,7 +56,10 @@ export default function MediaListItem(props: IMediaListItem) {
           {!imageUrl && (
             <div className="media-list-item__missing-image">
               <VideocamIcon style={{ fontSize: "5rem" }} />
-              {/* <p>Image not found</p> */}
+              {/* {!contentAvailable && <p>Content not available right now.</p>} */}
+              {contentAvailable && (
+                <p>Content might not be available right now.</p>
+              )}
             </div>
           )}
         </div>

@@ -10,6 +10,7 @@ export interface IMedia {
     Url: string;
     ImageTypeCode: string;
   }[];
+  IsTrialContentAvailable: boolean;
 }
 
 export default function useGetMediaList(MediaListId: number) {

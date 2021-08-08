@@ -44,19 +44,30 @@ export default function Player(props: IPlayer) {
         )}
       </div>
       <div className="player__player-wrapper">
-        <ReactPlayer
-          url={media?.ContentUrl}
-          width="100%"
-          height="100%"
-          controls
-          playing
-          light
-          className="player__player"
-        />
+        {media?.ContentUrl ? (
+          <ReactPlayer
+            url={media?.ContentUrl}
+            width="100%"
+            height="100%"
+            controls
+            playing
+            light
+            className="player__player"
+          />
+        ) : (
+          <div className="player__player player__player-text">
+            <h2>Sorry</h2>
+            <p>Content is not available right now. Please try again later.</p>
+          </div>
+        )}
       </div>
       <div className="player__description">
-        <h2>Description</h2>
-        <p>{media?.Description}</p>
+        {media?.Description && (
+          <>
+            <h2>Description</h2>
+            <p>{media?.Description}</p>
+          </>
+        )}
         <div className="player__description-details">
           {mediaInfo.Duration && (
             <h3 className="player__description--inline">
