@@ -8,12 +8,24 @@ import VideocamIcon from "@material-ui/icons/Videocam";
 
 interface IMediaListItem {
   item: IMedia;
+  width: number;
 }
 
 export default function MediaListItem(props: IMediaListItem) {
   const history = useHistory();
-  const { item } = props;
-  // const contentAvailable = item.IsTrialContentAvailable
+  const { item, width } = props;
+
+  const mediaItemWrapper = React.useRef<any>(undefined);
+
+  React.useEffect(() => {
+    if (mediaItemWrapper) {
+      mediaItemWrapper.current.setAttribute(
+        "style",
+        `width:${width}px;height:${(9 / 16) * width}px`
+      );
+    }
+  }, [width]);
+
   const contentAvailable = true;
 
   function handleClick() {
@@ -32,35 +44,25 @@ export default function MediaListItem(props: IMediaListItem) {
     return frameImage?.Url;
   };
 
-  function clampTitle(title: string, characters: number) {
-    if (title.length > characters) {
-      return title.substring(0, characters) + "...";
-    } else {
-      return title;
-    }
-  }
-
   const imageUrl = findImageUrl(item);
 
   return (
     <li onClick={handleClick}>
-      <div className="media-list-item__container">
-        <div
-          className="media-list-item__image"
-          style={{ backgroundImage: `url('${imageUrl}')` }}
-        >
-          {!imageUrl && (
-            <div className="media-list-item__missing-image">
-              <VideocamIcon style={{ fontSize: "5rem" }} />
-              {/* {!contentAvailable && <p>Content not available right now.</p>} */}
-              {/* {contentAvailable && (
-                <p>Content might not be available right now.</p>
-              )} */}
-            </div>
-          )}
+      <div className="media-list-item__wrapper" ref={mediaItemWrapper}>
+        <div className="media-list-item__container">
+          <div
+            className="media-list-item__image"
+            style={{ backgroundImage: `url('${imageUrl}')` }}
+          >
+            {!imageUrl && (
+              <div className="media-list-item__missing-image">
+                <VideocamIcon style={{ fontSize: "5rem" }} />
+              </div>
+            )}
+          </div>
+          <h1 className="media-list-item__title">{item.Title}</h1>
+          <div className="media-list-item__container--hover"></div>
         </div>
-        <h1 className="media-list-item__title">{clampTitle(item.Title, 35)}</h1>
-        <div className="media-list-item__container--hover"></div>
       </div>
     </li>
   );
