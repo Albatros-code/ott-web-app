@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+// util
 import { IMedia } from "../util/useGetMediaList";
 
 // icons
@@ -15,11 +16,11 @@ export default function MediaListItem(props: IMediaListItem) {
   const history = useHistory();
   const { item, width } = props;
 
-  const mediaItemWrapper = React.useRef<any>(undefined);
+  const mediaItemWrapper = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (mediaItemWrapper) {
-      mediaItemWrapper.current.setAttribute(
+      mediaItemWrapper.current?.setAttribute(
         "style",
         `width:${width}px;height:${(9 / 16) * width}px`
       );

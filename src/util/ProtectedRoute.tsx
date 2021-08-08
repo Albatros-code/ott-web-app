@@ -3,11 +3,7 @@ import { Redirect, Route, useLocation } from "react-router-dom";
 // util
 import { useAppContext } from "./AppContext";
 
-// types
-// import { RouteProps } from "react-router";
-
 interface IProtectedRouteProps {
-  // component: React.FC<RouteProps>;
   component: any;
   [key: string]: any;
 }

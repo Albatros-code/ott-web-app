@@ -45,7 +45,6 @@ export default function Login() {
 
   return (
     <div>
-      {/* <h1>login page</h1> */}
       <SplashScreen hiddenLoadingIndicator={true} />
       <div
         className={`login__wrapper ${
@@ -69,14 +68,14 @@ export default function Login() {
             }}
           >
             <TextField
-              id="outlined-basic"
+              id="username"
               label="Username"
               variant="outlined"
               error={loginErrors}
               color="secondary"
             />
             <TextField
-              id="outlined-basic"
+              id="password"
               label="Password"
               variant="outlined"
               error={loginErrors}

@@ -80,7 +80,6 @@ export default function Player(props: IPlayer) {
 }
 
 function formatDuration(seconds: number) {
-  // const hours = Math.floor(seconds / 1000 / 60 / 60);
   const minutes = Math.floor(seconds / 1000 / 60);
   return minutes;
 }

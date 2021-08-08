@@ -37,7 +37,6 @@ const AppContext = React.createContext<IAppContext>({
 export const useAppContext = () => React.useContext(AppContext);
 
 const AppContextProvider = (props: any) => {
-  console.log("app Context Provider Refresh");
   const [appState, setAppState] = React.useState(appContextStateInitialValues);
   const {
     UI: { loading: loadingUI },
@@ -48,28 +47,12 @@ const AppContextProvider = (props: any) => {
     annonymousUserSessionStorage && parseInt(annonymousUserSessionStorage);
 
   React.useEffect(() => {
-    console.log("app Context Provider Effect");
-
     function refreshToken() {
       delete api.defaults.headers.common["Authorization"];
 
       if (annonymousUser) {
-        console.log("logging in Effect");
-
         loginAnonymousUser(setAppState)
           .then((res) => {
-            // api
-            //   .post("/Authorization/SignIn", {})
-            //   //api.post("/Authorization/SignIn", "", { withCredentials: true })
-            //   .then((res) => {
-            //     const token = `Bearer ${res.data.AuthorizationToken.Token}`;
-            //     api.defaults.headers.common["Authorization"] = token;
-            //     setAppState((prev) => ({
-            //       ...prev,
-            //       UI: { ...prev.UI, loading: false },
-            //       user: { ...prev.user, authenticated: true },
-            //     }));
-
             const tokenExpirationTime = new Date(
               res.data.AuthorizationToken.TokenExpires
             );
@@ -109,8 +92,6 @@ const AppContextProvider = (props: any) => {
 export default AppContextProvider;
 
 export function loginAnonymousUser(setAppState: IAppContext["setAppState"]) {
-  // const { setAppState } = appContext;
-
   return new Promise<any>((resolve, reject) => {
     api
       .post("/Authorization/SignIn", {})
@@ -134,8 +115,6 @@ export function loginAnonymousUser(setAppState: IAppContext["setAppState"]) {
 }
 
 export function logoutUser(appContext: IAppContext) {
-  console.log("logging out");
-
   const { setAppState } = appContext;
 
   delete api.defaults.headers.common["Authorization"];
@@ -143,7 +122,6 @@ export function logoutUser(appContext: IAppContext) {
 
   setAppState((prev) => ({
     ...prev,
-    // UI: { ...prev.UI, loading: false },
     user: { ...prev.user, authenticated: false },
   }));
 }

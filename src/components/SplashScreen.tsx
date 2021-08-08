@@ -1,6 +1,9 @@
 import React from "react";
-import Logo from "./OttLogo";
+
+// components
 import CircularProgress from "@material-ui/core/CircularProgress";
+
+import Logo from "./OttLogo";
 
 interface ISplashScreen {
   hiddenLoadingIndicator: boolean;
