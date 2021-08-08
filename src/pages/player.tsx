@@ -31,9 +31,6 @@ export default function Player(props: IPlayer) {
     }
   }, [history, media, mediaInfo]);
 
-  console.log(media);
-  console.log(mediaInfo);
-
   return media && mediaInfo ? (
     <div className="player__wrapper">
       <TopBar />

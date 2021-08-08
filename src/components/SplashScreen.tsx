@@ -3,27 +3,29 @@ import Logo from "./OttLogo";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface ISplashScreen {
-  hidden: boolean;
+  hiddenLoadingIndicator: boolean;
 }
 
 const defaultProps = {
-  hidden: false,
+  hiddenLoadingIndicator: false,
 };
 
 SplashScreen.defaultProps = defaultProps;
 
 export default function SplashScreen(props: ISplashScreen) {
-  const { hidden } = props;
+  const { hiddenLoadingIndicator } = props;
 
   return (
     <div className="splash-screen__container">
-      <Logo size={10} color="secondary" />
-      <p className="splash-screen__comment">
-        Simple application for watching videos.
-      </p>
+      <div className="splash-screen__logo">
+        <Logo size={10} color="secondary" />
+        <p className="splash-screen__comment">
+          Simple application for watching videos.
+        </p>
+      </div>
       <CircularProgress
         className={`splash-screen__progress ${
-          hidden && "splash-screen__progress--hidden"
+          hiddenLoadingIndicator && "splash-screen__progress--hidden"
         }`}
       />
     </div>

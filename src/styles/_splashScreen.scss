@@ -2,7 +2,7 @@
   &__container {
     background-color: $color-primary-light;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,6 +15,23 @@
     font-weight: 100;
     font-size: 2rem;
     margin-bottom: 5rem;
+    padding: 0 1rem;
+    text-align: center;
+    @media screen and (max-width: $breakpoint-sm) {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+  // TODO: Change Logo to SVG only. Update responsiveness.
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1);
+    @media screen and (max-width: $breakpoint-sm) {
+      transform: scale(0.65);
+    }
   }
 }
 
