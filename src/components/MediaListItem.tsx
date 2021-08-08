@@ -44,11 +44,7 @@ export default function MediaListItem(props: IMediaListItem) {
 
   return (
     <li onClick={handleClick}>
-      <div
-        className={`media-list-item__container ${
-          contentAvailable && "media-list-item__container--hover"
-        }`}
-      >
+      <div className="media-list-item__container">
         <div
           className="media-list-item__image"
           style={{ backgroundImage: `url('${imageUrl}')` }}
@@ -57,13 +53,14 @@ export default function MediaListItem(props: IMediaListItem) {
             <div className="media-list-item__missing-image">
               <VideocamIcon style={{ fontSize: "5rem" }} />
               {/* {!contentAvailable && <p>Content not available right now.</p>} */}
-              {contentAvailable && (
+              {/* {contentAvailable && (
                 <p>Content might not be available right now.</p>
-              )}
+              )} */}
             </div>
           )}
         </div>
         <h1 className="media-list-item__title">{clampTitle(item.Title, 35)}</h1>
+        <div className="media-list-item__container--hover"></div>
       </div>
     </li>
   );

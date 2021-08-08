@@ -106,7 +106,7 @@ export default function Login() {
                   variant="outlined"
                   color="secondary"
                 >
-                  Login as guest user
+                  continue as guest
                 </Button>
               </Grid>
             </Grid>
