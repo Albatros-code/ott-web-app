@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 // util
-import { useAppContext, loginAnonymousUser } from "../util/AppContext";
+import { useAppContext, loginUser } from "../util/AppContext";
 
 // components
 import { Button, CircularProgress, Grid, TextField } from "@material-ui/core";
@@ -17,6 +17,27 @@ export default function Login() {
   const [formLoading, setFormLoading] = React.useState(false);
   const [loginErrors, setLoginErrors] = React.useState(false);
 
+  const [form, setForm] = React.useState({
+    username: "",
+    password: "",
+  });
+
+  const inputRef = React.useRef<HTMLInputElement>();
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  const handleChange = (e: any) => {
+    setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
   React.useEffect(() => {
     if (appState.user.authenticated) {
       history.push("/");
@@ -28,7 +49,7 @@ export default function Login() {
     setFormLoading(true);
     setTimeout(
       () =>
-        loginAnonymousUser(setAppState).then((res) => {
+        loginUser(setAppState).then((res) => {
           history.push("/");
         }),
       200
@@ -36,11 +57,21 @@ export default function Login() {
   };
 
   const handleLogin = () => {
-    setFormLoading(true);
-    setTimeout(() => {
+    if (!form.username || !form.password) {
       setLoginErrors(true);
-      setFormLoading(false);
-    }, 1000);
+      return;
+    }
+
+    setFormLoading(true);
+    loginUser(setAppState, form.username, form.password)
+      .then((res) => {
+        setFormLoading(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        setFormLoading(false);
+        setLoginErrors(true);
+      });
   };
 
   return (
@@ -73,6 +104,9 @@ export default function Login() {
               variant="outlined"
               error={loginErrors}
               color="secondary"
+              value={form.username}
+              onChange={handleChange}
+              inputRef={inputRef}
             />
             <TextField
               id="password"
@@ -81,6 +115,8 @@ export default function Login() {
               error={loginErrors}
               color="secondary"
               type="password"
+              value={form.password}
+              onChange={handleChange}
             />
           </form>
           <div className="login__buttons">

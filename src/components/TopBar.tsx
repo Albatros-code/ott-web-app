@@ -23,13 +23,18 @@ export default function TopBar() {
         <OttLogo size={3.5} color="secondary" />
       </Link>
       <div className="top-bar__buttons">
+        {appContext.appState.user.id && appContext.appState.user.id > 0 && (
+          <p>User Id: {appContext.appState.user.id}</p>
+        )}
         <Button
           onClick={handleLogout}
           variant="contained"
           color="secondary"
           startIcon={<InputIcon />}
         >
-          Log in
+          {appContext.appState.user.id && appContext.appState.user.id > 0
+            ? "Log out"
+            : "Log in"}
         </Button>
       </div>
     </div>
